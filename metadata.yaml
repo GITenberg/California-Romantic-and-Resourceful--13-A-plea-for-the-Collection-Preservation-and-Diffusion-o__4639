@@ -1,0 +1,28 @@
+_repo: California-Romantic-and-Resourceful--13-A-plea-for-the-Collection-Preservation-and-Diffusion-o__4639
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Davis, John Francis
+    alias: Davis, John F. (John Francis)
+    birthdate: 1859
+    deathdate: 1930
+    gutenberg_agent_id: '1523'
+    url: http://www.gutenberg.org/2009/agents/1523
+description: ''
+gutenberg_issued: '2003-11-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4639'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'California -- History -- Sources'
+- !lcc 'F850.5'
+- !lcsh 'Argüello y Morago, María de la Concepción Marcela, d. 1857'
+- !lcsh 'California -- History'
+- GITenberg
+title: "California Romantic and Resourceful\r\nA plea for the Collection, Preservation\
+  \ and Diffusion of Information Relating to Pacific Coast History"
+url: http://www.gutenberg.org/ebooks/4639
