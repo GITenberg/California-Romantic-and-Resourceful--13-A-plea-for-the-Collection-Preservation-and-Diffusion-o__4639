@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: bRa2J+0BmSwTG2f3qrDP2ErwVRLgvjU3Vm52n8gvVJXJhwecP8jC1+4GJ445SrfBq/a1OUGhiaVdElpFab/UJ5MR5RjXsNVQmbsD3Tf74N6OqEuJeN3hZVDEmcImnxTH28IZhPrdlUOIHT9edat98HvXHb+pZqn5ql/xr88qaSvaRKnyqn0gNzH2wgLN/esFkXK0ku9GKyRnXP7MmvqxrsyVAkP/kAiD0AHm1utGe941YF/q0kV46Bbuv1WrR3brwxQtWCFwDC4cHB1Lmbcdj/obqq7O+pjw3Ln5eNpV9A/sQf//AG0W3NyUdnZBtSDdj/l5DO7ajj4q6gA846jwGekWaE5wGwY1qduuciXjwajxstwUHbRxy9aQU422/wQ7EYZMZWhAyJv2WUVFbM52ujfntzmc1wAcKHgU9lXEFb1C2bspmSRcXgEA9zdEyJMBPzwGp54CKf5QdxoYyizSwI82Wht8pSx9NFeWBEZy56KHQHtTFy0+Pw+eJZkc2hbheshqpdZtMGYa1yNqbJQYemTwWcvwSJDTAL2/NXWC98kDqvDpf/7FzWXeyCpiZ/+GW1XZ3TsQgqLteX1tTgZk5fktooq5L9Qnjt8MER4/54XPhFV0pISk0ZTVvvnaV9a/G6GAq5Xae6pgbLNl42enQataSj0gizOSGCzEJaDtaMw=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/California-Romantic-and-Resourceful--13-A-plea-for-the-Collection-Preservation-and-Diffusion-o__4639
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
